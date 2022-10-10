@@ -73,7 +73,8 @@ public class SprayPaint : MonoBehaviour
             Texture2D tex = rend.material.mainTexture as Texture2D;
               
               Vector2 pixelUV = hit.textureCoord;
-              Debug.Log(pixelUV);
+              
+              Debug.Log("Original pixel UVS.X = "+pixelUV.x+"   Original pixel UVS.y = "+pixelUV.y);
               pixelUV.x *= tex.width;
               pixelUV.y *= tex.height;
               
@@ -89,11 +90,17 @@ public class SprayPaint : MonoBehaviour
                 var realx = pixelUV.x + x1;
                 var realy = pixelUV.y + y1;
     
+                
+                Debug.Log("This is the pixelUV.x "+ pixelUV.x+ "        This is pixelUV.y  "+ pixelUV.y);
+                Debug.Log("THE LOG THAT I NEED ______ realx= "+realx+"    Real Y= "+ realy + "   Texture x "+ tex.width+ "   Texture Y = " +tex.height);
+                
+                
                 var test = tex.GetPixels((int) realx, (int) realy, size, size);
+              //  Debug.Log("THE LOG THAT I NEED ______ realx= "+realx+"    Real Y= "+ realy + "   Texture  "+ tex.texelSize);
                 for (int j = 0; j <  size*size; j++)
                 {
                     test[j] = Color.Lerp(test[j], col, Mathf.Lerp(hardness/2,hardness*2,hardness));      
-                }
+                }//Mathf.Lerp(hardness/2,hardness*2,hardness)
                 
                 tex.SetPixels((int)realx, (int)realy, size, size,test);
             }

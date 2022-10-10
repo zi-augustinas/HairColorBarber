@@ -1872,6 +1872,21 @@ PrefabInstance:
       propertyPath: size
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 3708937790729124461, guid: 8a7eb92fc74239547a52f659b617b479,
+        type: 3}
+      propertyPath: col.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3708937790729124461, guid: 8a7eb92fc74239547a52f659b617b479,
+        type: 3}
+      propertyPath: col.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3708937790729124461, guid: 8a7eb92fc74239547a52f659b617b479,
+        type: 3}
+      propertyPath: col.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8135367610301423463, guid: 8a7eb92fc74239547a52f659b617b479,
         type: 3}
       propertyPath: m_RootOrder
