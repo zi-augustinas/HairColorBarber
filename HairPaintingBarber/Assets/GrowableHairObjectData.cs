@@ -10,7 +10,7 @@ public class GrowableHairObjectData : MonoBehaviour
    [HideInInspector]
    public Vector3[] vertices;
    [HideInInspector]
-   public Vector3[] DefaultVertices;
+   public Vector3[] DefaultVertices;  // This is for hair trimmer 
    public MeshFilter meshFilter;
    public MeshCollider meshCollider;
    
@@ -18,10 +18,11 @@ public class GrowableHairObjectData : MonoBehaviour
     {
         objectWorldToMatrix=transform.localToWorldMatrix;
         vertices = meshFilter.mesh.vertices;
-        DefaultVertices = vertices;
+        DefaultVertices = new Vector3[vertices.Length];
+        Array.Copy(vertices,DefaultVertices,vertices.Length);
     }
 
-    public void RecalculateCollider() // Call this from editor when deactivating hairSpray
+    public void RecalculateCollider() 
     {
         meshCollider.sharedMesh = meshFilter.sharedMesh;
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bool_ScriptableObjectEvent : ScriptableObject
 { 
     event Action<bool> SimpleGameEvent;
-
+    
     public void RaiseEvent(bool value)
     {
         SimpleGameEvent?.Invoke(value);

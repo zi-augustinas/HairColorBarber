@@ -18,8 +18,7 @@ public class HairGrowerSpray : MonoBehaviour
 
     [SerializeField]
     Bool_ScriptableObjectEvent m_BrushSizeChangeEvent;
-    [SerializeField]
-    Bool_ScriptableObjectEvent m_HairSprayPickedupEvent;
+  
     [SerializeField]
     Bool_ScriptableObjectEvent m_HairSprayActivatedEvent;
 
@@ -28,19 +27,10 @@ public class HairGrowerSpray : MonoBehaviour
     void OnEnable()
     {
        // m_BrushSizeChangeEvent.AddListener();
-       m_HairSprayPickedupEvent.AddListener(value=>m_PickedUpHairSpray = value);
        m_HairSprayActivatedEvent.AddListener(value =>m_ActivatingSpray = value);
-       
-        // subscribe to event when brush size is changed
-        //subscribe to event when picked up hairSpray
-        // subscrive to event when pressing spray button
+       // subscribe to event when brush size is changed
     }
-
-    void OnDisable()
-    {
-        // unsubscribe to event when brush size is changed
-    }
-
+    
     void Start()
     {
         m_HairGrowerLogic = new HairGrowerLogic();
@@ -49,7 +39,7 @@ public class HairGrowerSpray : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_PickedUpHairSpray)
+        if (m_ActivatingSpray)
         {
             CheckIfHittingCorrectTarget();
         }
@@ -61,14 +51,15 @@ public class HairGrowerSpray : MonoBehaviour
         var ray = new Ray(m_SprayPoint.position, m_SprayPoint.forward);
         Physics.Raycast(ray, out hit, 100);
 
-        if (hit.transform.gameObject == m_HairObjectData.gameObject)
-            if (m_ActivatingSpray)
+        if(hit.transform!=null)
+        {
+            if (hit.transform.gameObject == m_HairObjectData.gameObject)
                 m_HairGrowerLogic.SculptingEffect(hit.point,
                     m_HairObjectData.objectWorldToMatrix,
                     m_HairObjectData.vertices,
-                    m_HairObjectData.DefaultVertices,
                     m_HairObjectData.meshFilter,
                     m_HairObjectData.meshCollider,
                     m_BrushSize);
+        }
     }
 }
