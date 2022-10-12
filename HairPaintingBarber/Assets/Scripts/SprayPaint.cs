@@ -6,7 +6,12 @@ using UnityEngine;
 public class SprayPaint : MonoBehaviour
 {
 
- 
+    [SerializeField]
+    PaintSurface m_PaintSurface;
+    
+    [SerializeField]
+    ColourSprayLogic m_SprayLogic;
+    
     double PI = 3.1415926535;
     public Color col;
  
@@ -22,10 +27,12 @@ public class SprayPaint : MonoBehaviour
 
     bool m_Paint=false;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_SprayLogic = new ColourSprayLogic();
     }
 
     // Update is called once per frame
@@ -34,15 +41,9 @@ public class SprayPaint : MonoBehaviour
         if (m_Paint)
             SprayThePaint();
     }
-
-    public void selectingstuff()
-    {
-        Debug.Log("selecting");
-    }
-
     public void Activate()
     {
-        Debug.Log("Activating");
+        
         m_Paint = true;
     }
 
@@ -58,80 +59,13 @@ public class SprayPaint : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100))
         {
-            if (hit.transform.gameObject != null)
+            if (hit.transform.gameObject != null && m_PaintSurface.gameObject==hit.transform.gameObject)
             {
-               Debug.Log(hit.transform.name); 
-                PixelColouring(hit);
+                m_SprayLogic.PixelColouring(hit.textureCoord,size,hardness,col,m_PaintSurface.texture2D);
+                
             }
         }
     }
 
-    void PixelColouring(  RaycastHit hit)
-        {
-            Renderer rend = hit.transform.GetComponent<Renderer>();
-            
-            Texture2D tex = rend.material.mainTexture as Texture2D;
-              
-              Vector2 pixelUV = hit.textureCoord;
-              
-              Debug.Log("Original pixel UVS.X = "+pixelUV.x+"   Original pixel UVS.y = "+pixelUV.y);
-              pixelUV.x *= tex.width;
-              pixelUV.y *= tex.height;
-              
-            
-            double  angle, x1=0, y1=0; 
-            
-            for(int i = 0; i < 360; i += 30)
-            {
-                angle = i;
-                x1 = size * Math.Cos(angle * PI / 180);
-                y1 = size * Math.Sin(angle * PI / 180);
-                
-                var realx = pixelUV.x + x1;
-                var realy = pixelUV.y + y1;
-    
-                
-                Debug.Log("This is the pixelUV.x "+ pixelUV.x+ "        This is pixelUV.y  "+ pixelUV.y);
-                Debug.Log("THE LOG THAT I NEED ______ realx= "+realx+"    Real Y= "+ realy + "   Texture x "+ tex.width+ "   Texture Y = " +tex.height);
-                
-                
-                var test = tex.GetPixels((int) realx, (int) realy, size, size);
-              //  Debug.Log("THE LOG THAT I NEED ______ realx= "+realx+"    Real Y= "+ realy + "   Texture  "+ tex.texelSize);
-                for (int j = 0; j <  size*size; j++)
-                {
-                    test[j] = Color.Lerp(test[j], col, Mathf.Lerp(hardness/2,hardness*2,hardness));      
-                }//Mathf.Lerp(hardness/2,hardness*2,hardness)
-                
-                tex.SetPixels((int)realx, (int)realy, size, size,test);
-            }
-            
-            for(int i = 0; i < 360; i += 30)
-            {
-                angle = i;
-                x1 = size/2 * Math.Cos(angle * PI / 180);
-                y1 = size/2 * Math.Sin(angle * PI / 180);
-                
-                var realx = pixelUV.x + x1+size/4;
-                var realy = pixelUV.y + y1+size/4;
-            
-                var test = tex.GetPixels((int) realx, (int) realy, (int)(size/2), (int)(size/2));
-                for (int j = 0; j <  (int)((int)(size/2)*(int)(size/2)); j++)
-                {
-                    test[j] = Color.Lerp(test[j], col, Mathf.Lerp(hardness*2,hardness*5,hardness));      
-                }
-                
-                tex.SetPixels((int)realx, (int)realy, (int)size/2, (int)size/2,test);
-            }
-            
-            
-            var middlePixels = tex.GetPixels((int)(pixelUV.x), (int) pixelUV.y, (int)(size/0.7f), (int)(size/0.7f));
-            for (int i = 0; i < (int)(size/0.7f)*(int)(size/0.7f); i++)
-            {
-                middlePixels[i] = Color.Lerp(middlePixels[i], col, hardness*5);
-            }
-            tex.SetPixels((int)(pixelUV.x),(int) pixelUV.y,(int)(size/0.7f), (int)(size/0.7f),middlePixels);
-            
-            tex.Apply();
-             
-            }
+  
 }

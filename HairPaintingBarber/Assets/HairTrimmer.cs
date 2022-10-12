@@ -13,7 +13,7 @@ public class HairTrimmer : MonoBehaviour
     GrowableHairObjectData m_HairObjectData;
 
     [SerializeField]
-    Transform m_SprayPoint;
+    Transform m_TrimPoint;
     
     HairGrowerLogic m_HairGrowerLogic;
     bool m_ActivatingSpray;
@@ -44,12 +44,12 @@ public class HairTrimmer : MonoBehaviour
     void TrimHair()
     {
         RaycastHit hit;
-        var ray = new Ray(m_SprayPoint.position, m_SprayPoint.forward);
+        var ray = new Ray(m_TrimPoint.position, m_TrimPoint.forward);
         Physics.Raycast(ray, out hit, 100);
         
         if(hit.transform!=null)
         {
-            if ( Vector3.Distance(hit.point,transform.position)<0.3f && hit.transform.gameObject == m_HairObjectData.gameObject )
+            if ( Vector3.Distance(hit.point,transform.position)<0.5f && hit.transform.gameObject == m_HairObjectData.gameObject )
             {
                 m_HairTrimLogic.SculptingEffect(hit.point,m_HairObjectData.objectWorldToMatrix,
                     m_HairObjectData.vertices,
@@ -58,10 +58,5 @@ public class HairTrimmer : MonoBehaviour
                     m_HairObjectData.meshCollider);
             }
         }
-    }
-
-    void DistanceMeasure()
-    {
-       // if(Vector3.Distance(transform.position,))
     }
 }

@@ -9,7 +9,10 @@ public class PaintSurface : MonoBehaviour
     [SerializeField]
     Texture m_MainTexture;
 
+    [HideInInspector]
     public Texture TextureClone;
+    [HideInInspector]
+    public Texture2D texture2D;
     void Start()
     {
         var mainTexture = Instantiate(m_MainTexture);
@@ -21,6 +24,7 @@ public class PaintSurface : MonoBehaviour
         }
 
         TextureClone = GetComponent<Renderer>().material.mainTexture;
+        texture2D = TextureClone as Texture2D;
     }
     
 }
