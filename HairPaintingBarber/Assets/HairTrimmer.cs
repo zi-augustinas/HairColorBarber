@@ -22,9 +22,11 @@ public class HairTrimmer : MonoBehaviour
     bool m_TrimmerInHairRange;
     bool m_TrimmerActivated;
 
+    LineRenderer rendere;
     void Start()
     {
         m_HairTrimLogic = new HairTrimLogic();
+        rendere = GetComponent<LineRenderer>();
     }
 
     void OnEnable()
@@ -34,7 +36,15 @@ public class HairTrimmer : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {  Debug.DrawLine(m_TrimPoint.position, m_TrimPoint.forward.normalized, Color.white, 2.5f);
+        
+        RaycastHit hit;
+        var ray = new Ray(m_TrimPoint.position, m_TrimPoint.forward);
+        Physics.Raycast(ray, out hit, 100);
+        
+        rendere.SetPosition(0,m_TrimPoint.position);
+        rendere.SetPosition(1,hit.point);
+        
         if (m_TrimmerActivated)
         {
             TrimHair();
@@ -59,4 +69,6 @@ public class HairTrimmer : MonoBehaviour
             }
         }
     }
+
+
 }

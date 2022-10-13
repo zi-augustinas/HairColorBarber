@@ -13,7 +13,7 @@ public class GrowableHairObjectData : MonoBehaviour
    public Vector3[] DefaultVertices;  // This is for hair trimmer 
    public MeshFilter meshFilter;
    public MeshCollider meshCollider;
-   
+
    void Awake()
     {
         objectWorldToMatrix=transform.localToWorldMatrix;

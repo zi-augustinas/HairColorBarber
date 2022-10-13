@@ -4,7 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - m_MainTexture: {fileID: 2800000, guid: aa0a2e53e9acc2649a36b8e9f0e38862, type: 3}
+  - m_MainTexture: {fileID: 2800000, guid: 7ea10228a46c19040949f63a42bafc4f, type: 3}
+  - TextureClone: {instanceID: 0}
+  - texture2D: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

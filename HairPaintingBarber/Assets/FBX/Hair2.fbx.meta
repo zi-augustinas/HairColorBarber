@@ -1,17 +1,8 @@
 fileFormatVersion: 2
-guid: f44dfe1c6317d5d42baa176099fce532
+guid: b2e37650b47480c43b0b1078b8039664
 ModelImporter:
   serializedVersion: 21300
-  internalIDToNameTable:
-  - first:
-      74: -3566847240715623696
-    second: metarig|AnimationCollection
-  - first:
-      74: 7241771982285646821
-    second: metarig|CubeAction
-  - first:
-      74: 1457117797356851285
-    second: metarig|Cylinder.001Action
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -41,10 +32,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.05
+    globalScale: 6
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -97,7 +88,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0005
+    globalScale: 6
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
