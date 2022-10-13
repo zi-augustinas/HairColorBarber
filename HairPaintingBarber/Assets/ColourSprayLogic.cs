@@ -6,7 +6,8 @@ using UnityEngine;
 public class ColourSprayLogic 
 {
     double PI = 3.1415926535;
-    double  angle, x1, y1; 
+    double  angle, x1, y1;
+    Color[] colours;
     // Start is called before the first frame update
      public void PixelColouring(  Vector2 pixelUV, int size, float hardness,Color col, Texture2D tex)
         {
@@ -24,14 +25,16 @@ public class ColourSprayLogic
                 
                 
                 
-                var colors = tex.GetPixels((int) realx, (int) realy, size, size);
+                colours = tex.GetPixels((int) realx, (int) realy, size, size);
               
                 for (int j = 0; j <  size*size; j++)
                 {
-                    colors[j] = Color.Lerp(colors[j], col, Mathf.Lerp(hardness/2,hardness*2,hardness));      
+                    colours[j] = Color.Lerp(colours[j], col, Mathf.Lerp(hardness/2,hardness*2,hardness));      
                 }
                 
-                tex.SetPixels((int)realx, (int)realy, size, size,colors);
+                
+                tex.SetPixels((int)realx, (int)realy, size, size,colours);
+                colours = null;
             }
             
             // for(int i = 0; i < 360; i += 30)
@@ -43,25 +46,26 @@ public class ColourSprayLogic
             //     var realx = pixelUV.x + x1+size/4;
             //     var realy = pixelUV.y + y1+size/4;
             //
-            //     var colors = tex.GetPixels((int) realx, (int) realy, (int)(size/2), (int)(size/2));
+            //     colours = tex.GetPixels((int) realx, (int) realy, (int)(size/2), (int)(size/2));
             //     
             //     for (int j = 0; j <  (int)((int)(size/2)*(int)(size/2)); j++)
             //     {
-            //         colors[j] = Color.Lerp(colors[j], col, Mathf.Lerp(hardness*2,hardness*5,hardness));      
+            //         colours[j] = Color.Lerp(colors[j], col, Mathf.Lerp(hardness*2,hardness*5,hardness));      
             //     }
             //     
-            //     tex.SetPixels((int)realx, (int)realy, (int)size/2, (int)size/2,colors);
+            //     tex.SetPixels((int)realx, (int)realy, (int)size/2, (int)size/2,colours);
+           // colours = null;
             // }
             //
             
-            var middlePixelsColours = tex.GetPixels((int)(pixelUV.x), (int) pixelUV.y, (int)(size/0.7f), (int)(size/0.7f));
+            colours = tex.GetPixels((int)(pixelUV.x), (int) pixelUV.y, (int)(size/0.7f), (int)(size/0.7f));
             
             for (int i = 0; i < (int)(size/0.7f)*(int)(size/0.7f); i++)
             {
-                middlePixelsColours[i] = Color.Lerp(middlePixelsColours[i], col, hardness*5);
+                colours[i] = Color.Lerp(colours[i], col, hardness*5);
             }
-            tex.SetPixels((int)(pixelUV.x),(int) pixelUV.y,(int)(size/0.7f), (int)(size/0.7f),middlePixelsColours);
-            
+            tex.SetPixels((int)(pixelUV.x),(int) pixelUV.y,(int)(size/0.7f), (int)(size/0.7f),colours);
+            colours = null;
             tex.Apply();
              
             }
