@@ -13,9 +13,11 @@ public class GrowableHairObjectData : MonoBehaviour
    public Vector3[] DefaultVertices;  // This is for hair trimmer 
    public MeshFilter meshFilter;
    public MeshCollider meshCollider;
+   public int[] Triangles;
 
    void Awake()
-    {
+   {
+        Triangles = meshFilter.mesh.triangles;
         objectWorldToMatrix=transform.localToWorldMatrix;
         vertices = meshFilter.mesh.vertices;
         DefaultVertices = new Vector3[vertices.Length];

@@ -3,17 +3,16 @@ using UnityEngine;
 public class HairGrowerLogic
 {
     Vector3 worldVertexPosition;
-    public void SculptingEffect(Vector3 point, Matrix4x4 objectWorldToMatrix, Vector3[] vertices, MeshFilter meshFilter, MeshCollider meshCollider, float brushSize)
+    public void SculptingEffect(Vector3[] vertices, Transform hitTransform,Vector3 hitVertexWorldPosition, MeshFilter meshFilter, float brushSize)
     {
         for (int i = 0; i < vertices.Length; i++)
         {
-            worldVertexPosition = objectWorldToMatrix.MultiplyPoint3x4(vertices[i]);
-
-            if (Vector3.Distance(point, worldVertexPosition) < 0.05f)
+            worldVertexPosition = hitTransform.TransformPoint(vertices[i]);
+            if (Vector3.Distance(hitVertexWorldPosition, worldVertexPosition) < 0.02f)
             {
-                vertices[i].x = Mathf.Lerp(vertices[i].x, vertices[i].x * 1.05f, Time.deltaTime * 4);
-                vertices[i].y = Mathf.Lerp(vertices[i].y, vertices[i].y * 1.05f, Time.deltaTime * 4);
-                vertices[i].z = Mathf.Lerp(vertices[i].z, vertices[i].z * 1.05f, Time.deltaTime * 4);
+                vertices[i].x = Mathf.Lerp(vertices[i].x, vertices[i].x*1.05f, Time.deltaTime*2);
+                vertices[i].y = Mathf.Lerp(vertices[i].y, vertices[i].y*1.05f, Time.deltaTime*2);
+                vertices[i].z = Mathf.Lerp(vertices[i].z, vertices[i].z*1.05f, Time.deltaTime*2);
             }
         }
         meshFilter.mesh.vertices = vertices;

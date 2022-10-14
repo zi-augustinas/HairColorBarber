@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Bool Game Event", menuName = "Create Bool Game Event", order = 1)]
+[CreateAssetMenu(fileName = "Bool Game Event", menuName = "Create Game Event/Bool Game Event", order = 1)]
 public class Bool_ScriptableObjectEvent : ScriptableObject
 { 
     event Action<bool> SimpleGameEvent;

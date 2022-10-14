@@ -4928,10 +4928,13 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
+      m_Calls: []
+  m_SelectExited:
+    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3708937790729124461}
         m_TargetAssemblyTypeName: SprayPaint, Assembly-CSharp
-        m_MethodName: selectingstuff
+        m_MethodName: Deactivating
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4941,12 +4944,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_SelectExited:
-    m_PersistentCalls:
-      m_Calls: []
+      - m_Target: {fileID: 4295259625720181423}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_Activated:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 4295259625720181423}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 3708937790729124461}
         m_TargetAssemblyTypeName: SprayPaint, Assembly-CSharp
         m_MethodName: Activate
@@ -4962,6 +4986,18 @@ MonoBehaviour:
   m_Deactivated:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 4295259625720181423}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 3708937790729124461}
         m_TargetAssemblyTypeName: SprayPaint, Assembly-CSharp
         m_MethodName: Deactivating
@@ -5050,10 +5086,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c67abbe824713fb4fa09d9f7b72f0678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_PaintSurface: {fileID: 0}
   col: {r: 1, g: 0, b: 0, a: 0}
   size: 46
   hardness: 0.081
   m_SprayPoint: {fileID: 3686675975588879710}
+  m_SizeChangeEvent: {fileID: 0}
 --- !u!1001 &5770923192047507102
 PrefabInstance:
   m_ObjectHideFlags: 0

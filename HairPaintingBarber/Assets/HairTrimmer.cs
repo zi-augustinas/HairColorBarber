@@ -1,74 +1,51 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HairTrimmer : MonoBehaviour
 {
-    HairTrimLogic m_HairTrimLogic;
+    
     [SerializeField]
     Bool_ScriptableObjectEvent m_TrimmerActivatedEvent;
-    
+
     [SerializeField]
     GrowableHairObjectData m_HairObjectData;
 
     [SerializeField]
     Transform m_TrimPoint;
     
-    HairGrowerLogic m_HairGrowerLogic;
-    bool m_ActivatingSpray;
-    bool m_PickedUpHairSpray;
-
-    bool m_TrimmerInHairRange;
+    HairTrimLogic m_HairTrimLogic;
     bool m_TrimmerActivated;
+    int m_HairMask;
 
-    LineRenderer rendere;
     void Start()
     {
         m_HairTrimLogic = new HairTrimLogic();
-        rendere = GetComponent<LineRenderer>();
+        m_HairMask = LayerMask.GetMask("Hair");
     }
 
     void OnEnable()
     {
-        m_TrimmerActivatedEvent.AddListener(value =>m_TrimmerActivated = value);
+        m_TrimmerActivatedEvent.AddListener(value => m_TrimmerActivated = value);
     }
 
     // Update is called once per frame
     void Update()
-    {  Debug.DrawLine(m_TrimPoint.position, m_TrimPoint.forward.normalized, Color.white, 2.5f);
-        
-        RaycastHit hit;
-        var ray = new Ray(m_TrimPoint.position, m_TrimPoint.forward);
-        Physics.Raycast(ray, out hit, 100);
-        
-        rendere.SetPosition(0,m_TrimPoint.position);
-        rendere.SetPosition(1,hit.point);
-        
-        if (m_TrimmerActivated)
-        {
-            TrimHair();
-        }
+    {
+        if (m_TrimmerActivated) TrimHair();
     }
 
     void TrimHair()
     {
         RaycastHit hit;
         var ray = new Ray(m_TrimPoint.position, m_TrimPoint.forward);
-        Physics.Raycast(ray, out hit, 100);
-        
-        if(hit.transform!=null)
+        Physics.Raycast(ray, out hit, 0.1f, m_HairMask);
+
+        if (hit.transform != null)
         {
-            if ( Vector3.Distance(hit.point,transform.position)<0.5f && hit.transform.gameObject == m_HairObjectData.gameObject )
-            {
-                m_HairTrimLogic.SculptingEffect(hit.point,m_HairObjectData.objectWorldToMatrix,
-                    m_HairObjectData.vertices,
-                    m_HairObjectData.DefaultVertices,
-                    m_HairObjectData.meshFilter,
-                    m_HairObjectData.meshCollider);
-            }
+            var hitTransform = hit.transform;
+            var hitVertex = m_HairObjectData.vertices[m_HairObjectData.Triangles[hit.triangleIndex * 3 + 0]];
+            hitVertex = hitTransform.TransformPoint(hitVertex);
+            m_HairTrimLogic.SculptingEffect(m_HairObjectData.vertices, hitTransform, hitVertex, m_HairObjectData.DefaultVertices, m_HairObjectData.meshFilter);
         }
     }
-
-
 }

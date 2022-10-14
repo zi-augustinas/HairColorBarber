@@ -12,7 +12,7 @@ public class ColourSprayLogic
      public void PixelColouring(  Vector2 pixelUV, int size, float hardness,Color col, Texture2D tex)
         {
             pixelUV.x *= tex.width;
-              pixelUV.y *= tex.height;
+            pixelUV.y *= tex.height;
 
             for(int i = 0; i < 360; i += 30)
             {
@@ -37,26 +37,6 @@ public class ColourSprayLogic
                 colours = null;
             }
             
-            // for(int i = 0; i < 360; i += 30)
-            // {
-            //     angle = i;
-            //     x1 = size/2 * Math.Cos(angle * PI / 180);
-            //     y1 = size/2 * Math.Sin(angle * PI / 180);
-            //     
-            //     var realx = pixelUV.x + x1+size/4;
-            //     var realy = pixelUV.y + y1+size/4;
-            //
-            //     colours = tex.GetPixels((int) realx, (int) realy, (int)(size/2), (int)(size/2));
-            //     
-            //     for (int j = 0; j <  (int)((int)(size/2)*(int)(size/2)); j++)
-            //     {
-            //         colours[j] = Color.Lerp(colors[j], col, Mathf.Lerp(hardness*2,hardness*5,hardness));      
-            //     }
-            //     
-            //     tex.SetPixels((int)realx, (int)realy, (int)size/2, (int)size/2,colours);
-           // colours = null;
-            // }
-            //
             
             colours = tex.GetPixels((int)(pixelUV.x), (int) pixelUV.y, (int)(size/0.7f), (int)(size/0.7f));
             

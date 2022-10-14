@@ -25,7 +25,11 @@ public class SprayPaint : MonoBehaviour
     [SerializeField]
     Transform m_SprayPoint;
 
+    [SerializeField]
+    Int_ScriptableObjectEvent m_SizeChangeEvent;
+
     bool m_Paint=false;
+    int m_HairMask;
 
     
 
@@ -33,6 +37,12 @@ public class SprayPaint : MonoBehaviour
     void Start()
     {
         m_SprayLogic = new ColourSprayLogic();
+        m_HairMask=LayerMask.GetMask("Hair"); 
+    }
+
+    void OnEnable()
+    {
+        m_SizeChangeEvent.AddListener(value => size=value);
     }
 
     // Update is called once per frame
@@ -57,15 +67,12 @@ public class SprayPaint : MonoBehaviour
         RaycastHit hit;
         Ray ray = new Ray(m_SprayPoint.position,m_SprayPoint.forward); 
 
-        if (Physics.Raycast(ray, out hit, 100))
+        if (Physics.Raycast(ray, out hit, 0.25f,m_HairMask))
         {
-            if (hit.transform.gameObject != null && m_PaintSurface.gameObject==hit.transform.gameObject)
+            if (hit.transform.gameObject != null)
             {
                 m_SprayLogic.PixelColouring(hit.textureCoord,size,hardness,col,m_PaintSurface.texture2D);
-                
             }
         }
     }
-
-  
 }

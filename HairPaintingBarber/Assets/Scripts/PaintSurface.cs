@@ -8,9 +8,9 @@ public class PaintSurface : MonoBehaviour
 {
     [SerializeField]
     Texture m_MainTexture;
-
-    [HideInInspector]
-    public Texture TextureClone;
+    
+    Texture TextureClone;
+    
     [HideInInspector]
     public Texture2D texture2D;
     void Start()
