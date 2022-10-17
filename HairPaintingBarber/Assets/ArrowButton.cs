@@ -70,13 +70,6 @@ public class ArrowButton :  XRBaseInteractable
     {
         m_LowerTheChair = true;
     }
-    
-
-    public void Activate()
-    {
-        Debug.Log("Activation works for");
-    }
-
     public void DeActivate()
     {
         m_LiftTheChair = false;

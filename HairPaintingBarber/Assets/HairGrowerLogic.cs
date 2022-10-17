@@ -10,9 +10,9 @@ public class HairGrowerLogic
             worldVertexPosition = hitTransform.TransformPoint(vertices[i]);
             if (Vector3.Distance(hitVertexWorldPosition, worldVertexPosition) < 0.02f)
             {
-                vertices[i].x = Mathf.Lerp(vertices[i].x, vertices[i].x*1.05f, Time.deltaTime*2);
-                vertices[i].y = Mathf.Lerp(vertices[i].y, vertices[i].y*1.05f, Time.deltaTime*2);
-                vertices[i].z = Mathf.Lerp(vertices[i].z, vertices[i].z*1.05f, Time.deltaTime*2);
+                vertices[i].x = Mathf.Lerp(vertices[i].x, vertices[i].x*1.05f, Time.deltaTime*1.5f);
+                vertices[i].y = Mathf.Lerp(vertices[i].y, vertices[i].y*1.05f, Time.deltaTime*1.5f);
+                vertices[i].z = Mathf.Lerp(vertices[i].z, vertices[i].z*1.05f, Time.deltaTime*1.5f);
             }
         }
         meshFilter.mesh.vertices = vertices;

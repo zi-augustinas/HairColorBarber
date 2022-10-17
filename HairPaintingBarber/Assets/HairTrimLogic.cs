@@ -14,9 +14,9 @@ public class HairTrimLogic
             if (Vector3.Distance(hitVertexWorldPosition, worldVertexPosition) < 0.03f)
             {
                 
-                vertices[i].x = Mathf.Lerp(vertices[i].x, originalVertexPosition[i].x*0.8f, Time.deltaTime*2);
-                vertices[i].y = Mathf.Lerp(vertices[i].y, originalVertexPosition[i].y*0.8f, Time.deltaTime*2);
-                vertices[i].z = Mathf.Lerp(vertices[i].z, originalVertexPosition[i].z*0.8f, Time.deltaTime*2);
+                vertices[i].x = Mathf.Lerp(vertices[i].x, originalVertexPosition[i].x*0.75f, Time.deltaTime*2);
+                vertices[i].y = Mathf.Lerp(vertices[i].y, originalVertexPosition[i].y*0.75f, Time.deltaTime*2);
+                vertices[i].z = Mathf.Lerp(vertices[i].z, originalVertexPosition[i].z*0.75f, Time.deltaTime*2);
             }
         }
         meshFilter.mesh.vertices = vertices;

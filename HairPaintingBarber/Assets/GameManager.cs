@@ -14,24 +14,19 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     PaintSurface m_PaintSurface;
 
-    void OnDisable()
+    void OnEnable()
     {
         m_JobsDone.AddListener(DisableHair);
+    }
+
+    void OnDisable()
+    {
+        m_JobsDone.RemoveListener(DisableHair);
     }
 
     void DisableHair(bool value)
     {
         m_HairObjectData.enabled = value;
         m_PaintSurface.enabled = value;
-    }
-
-    public void RestartScene()
-    {
-        SceneManager.LoadScene("MainScene");
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
     }
 }
