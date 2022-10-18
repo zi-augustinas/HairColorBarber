@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class MainMenu : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class MainMenu : MonoBehaviour
     
     [SerializeField]
     Bool_ScriptableObjectEvent m_MovementSettings;
+    
     void Start()
     {
         m_IsSnappingOn = false;
