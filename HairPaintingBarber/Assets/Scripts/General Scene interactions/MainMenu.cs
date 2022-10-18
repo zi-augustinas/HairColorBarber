@@ -61,7 +61,7 @@ public class MainMenu : MonoBehaviour
     
     public void RestartScene()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Quit()

@@ -9,6 +9,9 @@ public class JobsDone : MonoBehaviour
     Bool_ScriptableObjectEvent m_JobsDone;
     [SerializeField]
     GameObject m_Mirror;
+    
+    [SerializeField]
+    GameObject m_MirrorLocal;
 
     void OnTriggerEnter(Collider other)
     {
@@ -16,6 +19,7 @@ public class JobsDone : MonoBehaviour
         {
             m_JobsDone.RaiseEvent(true);
             m_Mirror.SetActive(false);
+            m_MirrorLocal.SetActive(true);
         }
     }
 }

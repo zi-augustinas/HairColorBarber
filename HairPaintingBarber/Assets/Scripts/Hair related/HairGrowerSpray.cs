@@ -5,29 +5,14 @@ public class HairGrowerSpray : MonoBehaviour
 {
     [SerializeField]
     GrowableHairObjectData m_HairObjectData;
-
-    [SerializeField]
-    float m_BrushSize;
-
     [SerializeField]
     Transform m_SprayPoint;
 
     HairGrowerLogic m_HairGrowerLogic;
     bool m_ActivatingSpray;
     bool m_PickedUpHairSpray;
-
-    [SerializeField]
-    Bool_ScriptableObjectEvent m_BrushSizeChangeEvent;
-
-    [SerializeField]
-    Bool_ScriptableObjectEvent m_HairSprayActivatedEvent;
-
     int m_HairMask;
 
-    void OnEnable()
-    {
-        m_HairSprayActivatedEvent.AddListener(value => m_ActivatingSpray = value);
-    }
 
     void Start()
     {
@@ -40,7 +25,11 @@ public class HairGrowerSpray : MonoBehaviour
     {
         if (m_ActivatingSpray) CheckIfHittingCorrectTarget();
     }
-
+    
+    public void SetHairSprayActivationValue(bool isActive)
+    {
+        m_ActivatingSpray = isActive;
+    }
     void CheckIfHittingCorrectTarget()
     {
         RaycastHit hit;
@@ -52,7 +41,7 @@ public class HairGrowerSpray : MonoBehaviour
             Transform hitTransform = hit.transform;
             Vector3 hitVertex = m_HairObjectData.vertices[m_HairObjectData.Triangles[hit.triangleIndex * 3 + 0]];
             hitVertex = hitTransform.TransformPoint(hitVertex);
-            m_HairGrowerLogic.SculptingEffect(m_HairObjectData.vertices, hitTransform, hitVertex, m_HairObjectData.meshFilter, 1);
+            m_HairGrowerLogic.SculptingEffect(m_HairObjectData.vertices, hitTransform, hitVertex, m_HairObjectData.meshFilter);
         }
     }
 }

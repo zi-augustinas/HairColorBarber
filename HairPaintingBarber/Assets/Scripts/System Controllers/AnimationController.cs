@@ -9,12 +9,21 @@ public class AnimationController : MonoBehaviour
     Bool_ScriptableObjectEvent m_JobsDone;
     [SerializeField]
     Animator m_Controller;
-    [SerializeField]
-    GameObject m_Mirror;
 
     void OnEnable()
     {
-        m_JobsDone.AddListener(value =>m_Controller.SetBool("JobsDone",value));
-        m_JobsDone.AddListener(value =>m_Mirror.SetActive(value));
+        m_JobsDone.AddListener(EnableAnimationTrigger);
+    }
+    
+
+    void OnDisable()
+    {
+        m_JobsDone.RemoveListener(EnableAnimationTrigger);
+    }
+
+
+    void EnableAnimationTrigger(bool evenValue)
+    {
+        m_Controller.SetBool("JobsDone",evenValue);
     }
 }

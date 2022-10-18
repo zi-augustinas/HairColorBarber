@@ -4837,7 +4837,7 @@ GameObject:
   - component: {fileID: -1537488337156195381}
   - component: {fileID: 8242505883608126713}
   m_Layer: 0
-  m_Name: SprayPainter3
+  m_Name: SprayPainter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

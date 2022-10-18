@@ -5,9 +5,6 @@ public class HairTrimmer : MonoBehaviour
 {
     
     [SerializeField]
-    Bool_ScriptableObjectEvent m_TrimmerActivatedEvent;
-
-    [SerializeField]
     GrowableHairObjectData m_HairObjectData;
 
     [SerializeField]
@@ -22,11 +19,14 @@ public class HairTrimmer : MonoBehaviour
         m_HairTrimLogic = new HairTrimLogic();
         m_HairMask = LayerMask.GetMask("Hair");
     }
+    
 
-    void OnEnable()
+    public void SetTrimmerActivationValue(bool isActive)
     {
-        m_TrimmerActivatedEvent.AddListener(value => m_TrimmerActivated = value);
+        m_TrimmerActivated = isActive;
     }
+    
+    
 
     // Update is called once per frame
     void Update()

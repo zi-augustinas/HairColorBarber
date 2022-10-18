@@ -42,7 +42,17 @@ public class SprayPaint : MonoBehaviour
 
     void OnEnable()
     {
-        m_SizeChangeEvent.AddListener(value => size=value);
+        m_SizeChangeEvent.AddListener(UpdateSprayPaintSize);
+    }
+
+    void OnDisable()
+    {
+        m_SizeChangeEvent.RemoveListener(UpdateSprayPaintSize);
+    }
+
+    void UpdateSprayPaintSize(int eventValue)
+    {
+        size = eventValue;
     }
 
     // Update is called once per frame

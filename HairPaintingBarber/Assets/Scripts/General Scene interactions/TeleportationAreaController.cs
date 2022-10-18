@@ -14,6 +14,16 @@ public class TeleportationAreaController : MonoBehaviour
 
     void OnEnable()
     {
-        m_MovementSettings.AddListener(value=>m_area.enabled=value);
+        m_MovementSettings.AddListener(DisableTeleportArea);
+    }
+
+    void OnDisable()
+    {
+        m_MovementSettings.RemoveListener(DisableTeleportArea);
+    }
+    
+    void DisableTeleportArea(bool eventValue)
+    {
+        m_area.enabled = eventValue;
     }
 }
