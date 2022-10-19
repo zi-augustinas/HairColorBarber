@@ -9,11 +9,17 @@ The project uses XR Interaaction toolkt for interactions: https://docs.unity3d.c
 Hair Colouring system - it works with 3 different scripts two of which is just enabling the logic and responding to events in the game however the main one that is
 behind the whole logic is "ColourSprayLogic". It is a non-monobehaviour script that has only one method 
 "PixelColouring(Vector2 pixelUV, int size, float hardness, Color col, Texture2D tex)",
+
 pixelUV - is the texture coordinates from 3D space transfered to UV Map
+
 size - determines brush size
+
 hardness - determines how much of a bloor effect we want on the edges of the brush
+
 col - is the colour that we want to change the textures pixels to
+
 Tex - is the texture that we want to paint on
+
 This method uses GetPixels and SetPixels for the texture and changes it to desired colour.
 
 Hair mesh sculpting system - similar to hair colouring it also has support scripts that just enable logic and listen and respond to events in the scene.
@@ -23,9 +29,13 @@ The class name is "SculptingEffect" which has two methods inside
 "SculptReduce(Vector3[] vertices, Transform hitTransform, Vector3 hitVertexWorldPosition, Vector3[] originalVertexPosition, MeshFilter meshFilter)"
 
 verticies[] - array of verticies of an mesh that we want to modify
+
 hitTransform - is the exact transform of a raycasthit. It is used for futher calculations in the method
+
 hitVertexWorldPosition - its the closest vertex to a raycast hit point in worldPosition
+
 meshFilter - meshFilter of the mesh that we want to change
+
 [Exclusive for SculptReduce]
 originalVertexPosition[] - it is an array of original vertices positions before any transformation
 
