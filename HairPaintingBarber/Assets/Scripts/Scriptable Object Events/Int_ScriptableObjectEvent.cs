@@ -1,25 +1,26 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Int Game Event", menuName = "Create Game Event/Integer Event", order = 1)]
-public class Int_ScriptableObjectEvent : ScriptableObject
+namespace ScriptableObjectEvent
 {
-    event Action<int> SimpleGameEvent;
-    
-    public void RaiseEvent(int value)
+    [CreateAssetMenu(fileName = "Int Game Event", menuName = "Create Game Event/Integer Event", order = 1)]
+    public class Int_ScriptableObjectEvent : ScriptableObject
     {
-        SimpleGameEvent?.Invoke(value);
-    }
+        event Action<int> SimpleGameEvent;
 
-    public void AddListener(Action<int> func)
-    {
-        SimpleGameEvent += func;
-    }
+        public void RaiseEvent(int value)
+        {
+            SimpleGameEvent?.Invoke(value);
+        }
 
-    public void RemoveListener(Action<int> func)
-    {
-        SimpleGameEvent -= func;
+        public void AddListener(Action<int> func)
+        {
+            SimpleGameEvent += func;
+        }
+
+        public void RemoveListener(Action<int> func)
+        {
+            SimpleGameEvent -= func;
+        }
     }
 }

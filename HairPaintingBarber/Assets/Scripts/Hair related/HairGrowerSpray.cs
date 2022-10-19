@@ -1,47 +1,51 @@
 using System;
 using UnityEngine;
+using VertexModifier;
 
-public class HairGrowerSpray : MonoBehaviour
+namespace HairBarber
 {
-    [SerializeField]
-    GrowableHairObjectData m_HairObjectData;
-    [SerializeField]
-    Transform m_SprayPoint;
-
-    HairGrowerLogic m_HairGrowerLogic;
-    bool m_ActivatingSpray;
-    bool m_PickedUpHairSpray;
-    int m_HairMask;
-
-
-    void Start()
+    public class HairGrowerSpray : MonoBehaviour
     {
-        m_HairGrowerLogic = new HairGrowerLogic();
-        m_HairMask = LayerMask.GetMask("Hair");
-    }
+        [SerializeField]
+        GrowableHairObjectData m_HairObjectData;
+        [SerializeField]
+        Transform m_SprayPoint;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (m_ActivatingSpray) CheckIfHittingCorrectTarget();
-    }
-    
-    public void SetHairSprayActivationValue(bool isActive)
-    {
-        m_ActivatingSpray = isActive;
-    }
-    void CheckIfHittingCorrectTarget()
-    {
-        RaycastHit hit;
-        Ray ray = new Ray(m_SprayPoint.position, m_SprayPoint.forward);
-        Physics.Raycast(ray, out hit, 0.3f, m_HairMask);
+        HairGrowerLogic m_HairGrowerLogic;
+        bool m_ActivatingSpray;
+        bool m_PickedUpHairSpray;
+        int m_HairMask;
 
-        if (hit.transform != null)
+
+        void Start()
         {
-            Transform hitTransform = hit.transform;
-            Vector3 hitVertex = m_HairObjectData.vertices[m_HairObjectData.Triangles[hit.triangleIndex * 3 + 0]];
-            hitVertex = hitTransform.TransformPoint(hitVertex);
-            m_HairGrowerLogic.SculptingEffect(m_HairObjectData.vertices, hitTransform, hitVertex, m_HairObjectData.meshFilter);
+            m_HairGrowerLogic = new HairGrowerLogic();
+            m_HairMask = LayerMask.GetMask("Hair");
+        }
+        
+        void Update()
+        {
+            if (m_ActivatingSpray) CheckIfHittingCorrectTarget();
+        }
+
+        public void SetHairSprayActivationValue(bool isActive)
+        {
+            m_ActivatingSpray = isActive;
+        }
+
+        void CheckIfHittingCorrectTarget()
+        {
+            RaycastHit hit;
+            Ray ray = new Ray(m_SprayPoint.position, m_SprayPoint.forward);
+            Physics.Raycast(ray, out hit, 0.3f, m_HairMask);
+
+            if (hit.transform != null)
+            {
+                Transform hitTransform = hit.transform;
+                Vector3 hitVertex = m_HairObjectData.vertices[m_HairObjectData.Triangles[hit.triangleIndex * 3 + 0]];
+                hitVertex = hitTransform.TransformPoint(hitVertex);
+                m_HairGrowerLogic.SculptingEffect(m_HairObjectData.vertices, hitTransform, hitVertex, m_HairObjectData.meshFilter);
+            }
         }
     }
 }
