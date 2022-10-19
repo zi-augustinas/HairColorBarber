@@ -12,13 +12,13 @@ namespace HairBarber
         [SerializeField]
         Transform m_TrimPoint;
 
-        HairTrimLogic m_HairTrimLogic;
+        SculptingEffect m_HairTrimLogic;
         bool m_TrimmerActivated;
         int m_HairMask;
 
         void Start()
         {
-            m_HairTrimLogic = new HairTrimLogic();
+            m_HairTrimLogic = new SculptingEffect();
             m_HairMask = LayerMask.GetMask("Hair");
         }
 
@@ -43,7 +43,7 @@ namespace HairBarber
                 var hitTransform = hit.transform;
                 var hitVertex = m_HairObjectData.vertices[m_HairObjectData.Triangles[hit.triangleIndex * 3 + 0]];
                 hitVertex = hitTransform.TransformPoint(hitVertex);
-                m_HairTrimLogic.SculptingEffect(m_HairObjectData.vertices, hitTransform, hitVertex, m_HairObjectData.DefaultVertices, m_HairObjectData.meshFilter);
+                m_HairTrimLogic.SculptReduce(m_HairObjectData.vertices, hitTransform, hitVertex, m_HairObjectData.DefaultVertices, m_HairObjectData.meshFilter);
             }
         }
     }
