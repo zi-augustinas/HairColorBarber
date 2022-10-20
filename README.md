@@ -1,7 +1,8 @@
 # HairColorBarber
 A VR game in Unity, where you can paint hair with different colours and modify their shape
 
-
+Originally this was made with Unity 2020.3.11f1. The project is setuped for Android so make sure to switch platforms when the proejct is downloaded. 
+For Large Files this repository uses Git LFS
 
 ## Documentation
 
